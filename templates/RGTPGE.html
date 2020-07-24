@@ -1,0 +1,91 @@
+{% extends "BASE.html" %}
+<!-- Title -->
+{% block title %}Registration page{% endblock %}
+<!-- Head block -->
+{% block head %}
+  {{ super() }}
+{% endblock %}
+<!-- Error message block -->
+{% block errorblock %}
+<h2> {{errormsg}}</h2>
+{% endblock %}
+<!-- External scripts block -->
+{% block script %}
+<link rel="stylesheet" href="{{ url_for('static', filename='RGTSTYLE.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='imageArea.js') }}"></script>
+<script>
+$( document ).ready(function() {
+   $('#registrationForm').submit(function(){
+      var selected = document.getElementById("selected").value.split("-").filter(Boolean);
+      if( selected.length < 5){
+         alert('user must select minimum 5 areas');
+         return false;
+      }else{
+         return true;
+      }
+   });
+});
+</script>
+{% endblock %}
+<!-- Body block -->
+{% block bodyblock %}
+
+   <form id="registrationForm" action="/registerpage/register" method="POST">
+   <div class="signUpBox">
+        <!-- Full Name -->
+        <div class="signUpFields">
+            <p>Full Name</p>
+            <input type="text" name="fullname" required pattern="\S+.*"/>
+        </div>
+
+        <!-- Username -->
+        <div class="signUpFields">
+            <p>Username</p>
+            <input type="text" name="username" required pattern="\S+.*"/>
+        </div>
+
+        <!-- email -->
+        <div class="signUpFields">
+            <p>Email</p>
+            <input type="text" name="email" required pattern="\S+.*"/>
+        </div>
+
+        <!-- Telephone number -->
+        <div class="signUpFields">
+            <p>Telephone number</p>
+            <input type="text" name="telnum" required pattern="\S+.*"/>
+        </div>
+     </div>
+     <div class="signUpBox">
+        <div class="ImageSelector">
+           {% for image in imgs %}
+           <img src={{image.imgurl}} alt="{{image.imgname}}" onclick=switchImage("{{image.imgid}}","{{image.imgurl}}")>
+           {% endfor %}
+        </div>
+
+        <input type="hidden" id="selected" name="selected" value="">
+        <input type="hidden" id="selected-imageid" name="selected-imageid" value="{{imgs[0].imgid}}">
+
+        <div id="shownImg" class="shownImg" style="background-image:url('{{imgs[0].imgurl}}');">
+           <table class="shownTable" cellspacing="0" border="1" cellpadding="0">
+            {% for row in areas %}
+                <tr>
+                {% for col in row %}
+                   <td id="{{col.boxnum}}" class="imgarea"></td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+          </table>
+        </div>
+
+
+        <button type="button" onclick=resetSelected() >Reset</button>
+
+        <!-- Create AccountButton -->
+        <button class="signUpButton" type="submit" name="createAccount">Create Account</button>
+        </div>
+    </form>
+    <div class="signUpBox">
+    <a href="/"><button class="signUpButton" type="submit">Back</button></a>
+    </div>
+{% endblock %}

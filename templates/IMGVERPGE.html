@@ -1,0 +1,48 @@
+{% extends "BASE.html" %}
+<!-- Title -->
+{% block title %}Login page{% endblock %}
+<!-- Head block -->
+{% block head %}
+  {{ super() }}
+{% endblock %}
+<!-- Error message block -->
+{% block errorblock %}
+<h2> {{errormsg}}</h2>
+{% endblock %}
+<!-- External scripts block -->
+{% block script %}
+<link rel="stylesheet" href="{{ url_for('static', filename='RGTSTYLE.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='imageArea.js') }}"></script>
+{% endblock %}
+
+{% block bodyblock %}
+<div class="signUpBox">
+<form action="/ImgPage/validate" method="POST">
+   <div class="ImageSelector">
+      {% for image in imgs %}
+      <img src={{image.imgurl}} alt="{{image.imgname}}" onclick="switchImage('{{image.imgid}}','{{image.imgurl}}')">
+      {% endfor %}
+   </div>
+
+   <input type="hidden" id="selected" name="selected" value="">
+   <input type="hidden" id="selected-imageid" name="selected-imageid" value="{{imgs[0].imgid}}">
+
+   <div id="shownImg" class="shownImg" style="background-image:url('{{imgs[0].imgurl}}');">
+      <table class="shownTable" cellspacing="0" border="1" cellpadding="0">
+       {% for row in areas %}
+           <tr>
+           {% for col in row %}
+             <td id="{{col.boxnum}}" class="imgarea"></td>
+           {% endfor %}
+           </tr>
+       {% endfor %}
+     </table>
+   </div>
+
+   <button type="button" onclick=resetSelected() >Reset</button>
+   <input type="submit" value="Submit">
+   </form>
+   <a href="/logout"><button class="signUpButton" type="submit">Back</button></a>
+   </div>
+
+{% endblock %}

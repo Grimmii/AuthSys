@@ -1,0 +1,28 @@
+{% extends "BASE.html" %}
+<!-- Title -->
+{% block title %}Login page{% endblock %}
+<!-- Head block -->
+{% block head %}
+  {{ super() }}
+{% endblock %}
+<!-- Error message block -->
+{% block errorblock %}
+<h2> {{errormsg}}</h2>
+{% endblock %}
+<!-- External scripts block -->
+{% block script %}
+<link rel="stylesheet" href="{{ url_for('static', filename='LGNSTYLE.css') }}">
+{% endblock %}
+<!-- Body block -->
+{% block bodyblock %}
+<div id="loginBox">
+    <form action="/validation" method="POST">
+        <div class="loginFields">
+            <p>Username</p>
+            <input type="text" name="username">
+        </div>
+        <input type="submit" class="loginButtons" value="Next">
+    </form>
+    <a href="/registerpage"><button class="loginButtons" >Sign Up</button></a>
+</div>
+{% endblock %}

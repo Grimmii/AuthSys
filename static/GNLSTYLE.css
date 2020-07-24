@@ -1,0 +1,42 @@
+/* Chat containers */
+body {
+  background-color: #f2f2f2
+}
+
+.errormsgbox {
+   width : 100%;
+   height : auto;
+   margin : 20px auto;
+   border: 4px solid #bd0000;
+
+}
+.ImageSelector {
+   margin: 20px auto;
+   display: inlinse;
+   width : 100%;
+   height: 500px;
+   text-align: center;
+   overflow:auto;
+}
+
+.ImageSelector img {
+   width: 200px;
+   height: 200px;
+   margin : 0px 10px;
+}
+
+.shownImg {
+   width: 500px;
+   height: 500px;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+
+.shownTable {
+   width: 100%;
+   height: 100%;
+}
+.shownTable td {
+   border : 4px solid black;
+}

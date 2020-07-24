@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request, session, make_response,redirect, url_for
 
 from scripts import SessionKeys as sesskeys
-from flask_session import Session
 from flask import make_response
 from scripts.Database import Database
 from scripts import SYSCONFIG as config
 from scripts import Utilities as Utils
-from authy.api import AuthyApiClient
 import socket
 import random
 import traceback
@@ -16,7 +14,6 @@ AUTHY_API_KEY = 'asdf........................'
 app.secret_key = "UIOJEHBDNM"
 app.config.from_object('config')
 
-api = AuthyApiClient(app.config['AUTHY_API_KEY'])
 
 dbmain = Database()
 
